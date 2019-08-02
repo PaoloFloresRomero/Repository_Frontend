@@ -21,7 +21,8 @@ export class ClienteMisReservasComponent implements OnInit {
   clienteActual : Cliente;  
   recepcionistas : Recepcionista[]; 
   id : string;
-  auxiliar : Reserva;
+  preferencia : Reserva;
+  cosa:string;
 
   
   //validacion de mensajes.
@@ -43,7 +44,8 @@ export class ClienteMisReservasComponent implements OnInit {
       (error)=>{console.log('fallo al obtener recepcionistas.')}
     ) ;  
     this.getCliente();      
-    // this.getReservas();  
+    // this.getReservas();
+    this.cosa="12:29";
   }
 
   getReservas(cliente/* tiene ue ser any porque en agregar reservas es llamado dandole como valor una variable tipo reserva solo para utilizar el rut de la reserva */){ 
@@ -52,6 +54,9 @@ export class ClienteMisReservasComponent implements OnInit {
       (res :Reserva[]) => { 
         this.reservas = res;    
         console.log(this.reservas);
+        for(let i of res){
+          this.preferencia = i;
+        }
 
       },
       (error)=>{console.log('fallo en obtener reservas por rut.')}
@@ -212,7 +217,7 @@ export class ClienteMisReservasComponent implements OnInit {
     }
     return retorno;
   }
-  getPreferencias(cliente/* tiene ue ser any porque en agregar reservas es llamado dandole como valor una variable tipo reserva solo para utilizar el rut de la reserva */){ 
+  /*getPreferencias(cliente/* tiene ue ser any porque en agregar reservas es llamado dandole como valor una variable tipo reserva solo para utilizar el rut de la reserva ){ 
     let url = "http://localhost:8080/api/reservas/rut/" + cliente.rut;
     return this.reservaService.getReservas(url).subscribe(
       (res :Reserva[]) => { 
@@ -230,7 +235,7 @@ export class ClienteMisReservasComponent implements OnInit {
       
      
      
-  }
+  }*/
 
   
 }
